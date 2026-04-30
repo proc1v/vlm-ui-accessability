@@ -1,0 +1,9 @@
+[submodule "third_party/OmniParser"]
+	path = third_party/OmniParser
+	url = https://github.com/microsoft/OmniParser.git
+[submodule "third_party/Screen2AX"]
+	path = third_party/Screen2AX
+	url = https://github.com/MacPaw/Screen2AX.git
+[submodule "third_party/Qwen-VL-Finetune"]
+	path = third_party/Qwen-VL-Finetune
+	url = https://github.com/2U1/Qwen-VL-Series-Finetune.git

@@ -1,0 +1,68 @@
+diff --git a/requirements.txt b/requirements.txt
+index 14519a4..ca8e581 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -6,7 +6,7 @@ annotated-doc==0.0.4
+ annotated-types==0.7.0
+ asttokens==3.0.0
+ attrs==25.3.0
+-av==14.4.0
++# av==14.4.0
+ bitsandbytes==0.49.2
+ certifi==2025.4.26
+ charset-normalizer==3.4.1
+diff --git a/src/constants.py b/src/constants.py
+index 71c06d0..fc9bfd6 100644
+--- a/src/constants.py
++++ b/src/constants.py
+@@ -9,7 +9,49 @@ LLAVA_VIDEO_TOKEN = "<video>"
+ VISION_START_TOKEN = "<|vision_start|>"
+ VISION_END_TOKEN = "<|vision_end|>"
+ 
+-SYSTEM_MESSAGE = "You are a helpful assistant."
++SYSTEM_MESSAGE = """You are an accessibility metadata generator for macOS desktop applications.
++
++Given a screenshot of a macOS application window, generate its complete accessibility tree (AX tree) in the linearized format described below.
++
++## Output Format
++
++Each line represents one UI element. Use 2-space indentation to encode the parent-child hierarchy. The format for each line is:
++
++Role(subrole) [x1,y1,x2,y2] key1="value1" key2="value2"
++
++Where:
++- Role: one of the accessibility roles listed below
++- (subrole): optional subrole in parentheses (e.g., "close button", "standard window", "switch", "text")
++- [x1,y1,x2,y2]: bounding box coordinates normalized to 0–1000 range, where (x1,y1) is top-left and (x2,y2) is bottom-right
++- Attributes (include only when present):
++  - name="..." — the accessibility name/identifier
++  - desc="..." — the accessibility description
++  - value="..." — the current value (for inputs, toggles, text fields)
++
++## Valid Roles
++
++AXGroup — Structural containers that group related elements: window frames, toolbars, sidebars, menu bars, scroll areas, tab groups, table rows, form sections, or any logical grouping of child elements. Use AXGroup to represent the hierarchical structure of the interface.
++
++AXButton — All interactive controls that trigger an action when clicked: buttons, checkboxes, radio buttons, toggle switches, pop-up buttons, menu items, steppers, sliders, scroll bar handles, and color wells.
++
++AXDisclosureTriangle — A specific control that expands or collapses a section of content. Visually appears as a small triangle or chevron (▶/▼) next to expandable content.
++
++AXLink — Clickable text that navigates to another location or triggers an action. Visually distinguished from regular text by color, underline, or cursor change on hover.
++
++AXTextArea — All editable input fields: single-line text fields, multi-line text areas, search boxes, combo boxes, and date/time pickers.
++
++AXImage — Visual non-text content: icons, photos, illustrations, decorative images, progress indicators, loading spinners, and visual rulers.
++
++AXStaticText — All non-editable, non-interactive text displayed in the interface: labels, headings, descriptions, status messages, list markers, and any read-only text content.
++
++## Rules
++1. Indent child elements by 2 spaces relative to their parent.
++2. The root element should have no indentation.
++3. Group related UI elements under AXGroup container nodes to reflect the visual layout hierarchy.
++4. Every visible interactive or informational element must appear in the tree exactly once.
++5. Do NOT repeat elements. Each UI element in the screenshot corresponds to exactly one line in the output.
++6. Use ONLY roles from the valid roles list above.
++7. Output ONLY the tree — no explanations, no markdown code blocks, no commentary before or after the tree."""
+ 
+ MULTIMODAL_KEYWORDS = [
+     "pixel_values",

@@ -1,0 +1,27 @@
+{
+  "name": "vlm-accessibility",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "hostRequirements": {
+    "gpu": "optional"
+  },
+  "runArgs": [
+    "--gpus=all",
+    "--shm-size=256g",
+    "--ipc=host",
+  ],
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "anthropic.claude-code"
+      ]
+    }
+  }, 
+  "remoteUser": "root"
+}

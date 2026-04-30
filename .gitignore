@@ -1,0 +1,60 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Virtual envs (28GB+ in original repo) ---
+.venv/
+.venv-*/
+.venv_*/
+venv/
+.qwen_finetune/
+*.venv/
+
+# --- Model weights / checkpoints (203GB+ in original repo) ---
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+trained_models/
+checkpoints/
+weights/
+runs/
+
+# --- Datasets (5GB+ in original repo) ---
+data/
+datasets/
+!src/training/data/         # keep src/training/data/ (Dataset *classes*, not data files)
+
+# --- Inference outputs (regenerable) ---
+inference_results*/
+results/
+outputs/
+
+# --- Logs / wandb ---
+wandb/
+*.log
+*.out
+
+# --- IDE / OS ---
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- Allow figures/examples but no large blobs ---
+figures/**/*.psd
+figures/**/*.tiff
+*.mp4
+*.mov
+
+# --- Working notes (not part of the public docs) ---
+docs/notes/
